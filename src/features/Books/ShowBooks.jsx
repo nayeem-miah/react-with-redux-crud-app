@@ -2,8 +2,6 @@ import { useSelector } from "react-redux";
 
 const ShowBooks = () => {
     const books = useSelector(state => state.booksReducer.books);
-    // const dispatch = useDispatch()
-    console.log(books);
     return (
         <div>
             <h3 className="text-2xl text-center py-4"> Show Books list of the books</h3>

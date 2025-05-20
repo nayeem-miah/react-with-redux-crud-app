@@ -1,13 +1,26 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addBooks } from "./BookSlice";
+import { useNavigate } from "react-router-dom";
 
 const AddBooks = () => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const numberOfBooks = useSelector(state => state.booksReducer.books.length);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newBook = { title, author };
+        const newBook = {
+            id: numberOfBooks + 1,
+            title,
+            author
+        };
         console.log(newBook);
+        dispatch(addBooks(newBook));
+        navigate("/show-books")
     }
 
     return (
@@ -20,7 +33,7 @@ const AddBooks = () => {
                     <input
                         type="text"
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={e => setTitle(e.target.value)}
                         className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Enter book title"
                     />
@@ -31,7 +44,8 @@ const AddBooks = () => {
                     <input
                         type="text"
                         value={author}
-                        onChange={(e) => setAuthor(e.target.value)}
+                        onChange={e => setAuthor(e.target.value)}
+                        required
                         className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Enter author name"
                     />
