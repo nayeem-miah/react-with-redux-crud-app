@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     books: [
-        { id: 1, title: "perea doxical sazid", autor: "arif azad" },
-        { id: 2, title: "i love Bd", autor: "unknown person" },
-        { id: 3, title: "perea doxical sazid", autor: "arif azad" },
+        { id: 1, title: "perea doxical sazid", author: "arif azad" },
+        { id: 2, title: "i love Bd", author: "unknown person" },
+        { id: 3, title: "perea doxical sazid", author: "arif azad" },
     ]
 };
 

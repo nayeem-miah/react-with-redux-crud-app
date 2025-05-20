@@ -22,7 +22,7 @@ const ShowBooks = () => {
                         {books.map((book) => (
                             <tr key={book.id} className="hover:bg-gray-50 transition">
                                 <td className="p-3 border">{book.title}</td>
-                                <td className="p-3 border">{book.autor}</td>
+                                <td className="p-3 border">{book.author}</td>
                                 <td className="p-3 border">
                                     <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded">Edit</button>
                                 </td>
