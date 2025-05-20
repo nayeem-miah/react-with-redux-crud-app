@@ -1,25 +1,28 @@
-import { BrowserRouter, createBrowserRouter, Link, Routes } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../pages/Home";
+import Error from "../pages/Error";
+import AddBooks from "../pages/AddBooks";
+import ShowBooks from "../pages/ShowBooks";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
-        errorElement: <div className="text-red-500 text-2xl flex justify-center items-center
-        mx-auto my-auto">
-            <div>
-                error page
-                <h3>
-                    <button className="hover:text-amber-600 text-xl hover:underline"><Link to={'/'}>go to Home</Link></button>
-                </h3>
-            </div>
-        </div>,
+        errorElement: <Error />,
         children: [
             {
                 path: "/",
                 element: <Home />
-            }
+            },
+            {
+                path: "/add-books",
+                element: <AddBooks />
+            },
+            {
+                path: "/show-books",
+                element: <ShowBooks />
+            },
         ]
 
     }
