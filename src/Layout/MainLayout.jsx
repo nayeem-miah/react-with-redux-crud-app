@@ -5,16 +5,16 @@ const MainLayout = () => {
     return (
         <div>
             <Navbar />
-            <div className="mx-auto max-w-7xl min-h-screen">
+            <div className="mx-auto max-w-7xl  bg-amber-100">
                 <Outlet />
             </div>
-            <div>
-                <footer>
+            <footer>
+                <div>
                     <h3 className="bg-amber-200 p-4 text-center">
-                        @ react redux crud operation
+                        @ 2025 react redux crud operation
                     </h3>
-                </footer>
-            </div>
+                </div>
+            </footer>
         </div>
     );
 }
