@@ -1,12 +1,46 @@
-# React + Vite
+# 📘 React Toolkit CRUD with Mongoose
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a **Full-Stack CRUD Application** built with:
 
-Currently, two official plugins are available:
+- **Frontend:** React, Redux Toolkit, React Router DOM, Axios, Tailwind CSS
+- **Backend:** Node.js, Express.js, MongoDB with Mongoose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It allows users to create, read, update, and delete books from a MongoDB database.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+---
+
+## 🚀 Features
+
+### Frontend
+
+- Show all books
+- Add a new book
+- Delete a book
+- Edit/update book info
+- Redux Toolkit for state management
+
+### Backend
+
+- REST API endpoints
+- MongoDB integration using Mongoose
+- Error handling and async support
+
+---
+
+## 🧠 Technologies Used
+
+- **Frontend:** React, Redux Toolkit, Axios, Tailwind CSS, React Router DOM, Vite
+- **Backend:** Node.js, Express.js, MongoDB, Mongoose, CORS, Dotenv
+
+---
+
+## 🧰 How to Run the Project
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/react-toolkit-crud-with-mongoose.git
+cd react-toolkit-crud-with-mongoose
