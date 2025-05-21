@@ -9,9 +9,6 @@ It allows users to create, read, update, and delete books from a MongoDB databas
 
 ---
 
-
----
-
 ## 🚀 Features
 
 ### Frontend
@@ -39,8 +36,21 @@ It allows users to create, read, update, and delete books from a MongoDB databas
 
 ## 🧰 How to Run the Project
 
-### 1. Clone the Repository
+### 1. Clone the Repositories
+
+#### 📁 Frontend
 
 ```bash
-git clone https://github.com/your-username/react-toolkit-crud-with-mongoose.git
-cd react-toolkit-crud-with-mongoose
+git clone https://github.com/nayeem-miah/react-with-redux-crud-app-with-mongoose-client.git
+cd react-with-redux-crud-app-with-mongoose-client
+npm install
+npm run dev
+
+```
+
+```bash
+git clone https://github.com/nayeem-miah/react-with-redux-crud-app-with-mongoose-server.git
+cd react-with-redux-crud-app-with-mongoose-server
+npm install
+nodemon index.js
+```
