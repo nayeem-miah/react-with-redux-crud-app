@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addBooks } from "./BookSlice";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AddBooks = () => {
     const [title, setTitle] = useState("");
@@ -9,19 +10,28 @@ const AddBooks = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const numberOfBooks = useSelector(state => state.booksReducer.books.length);
+    // const numberOfBooks = useSelector(state => state.booksReducer.books.length);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const newBook = {
-            id: numberOfBooks + 1,
+            // id: numberOfBooks + 1,
             title,
             author
         };
         console.log(newBook);
-        dispatch(addBooks(newBook));
-        navigate("/show-books")
-    }
+        // post data in db
+        try {
+            const res = await axios.post("http://localhost:5000/book/add-book", newBook);
+            if (res.status === 200) {
+                alert(res.data.message);
+                dispatch(addBooks(newBook));
+                navigate("/show-books")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div className="py-10">
@@ -33,6 +43,7 @@ const AddBooks = () => {
                     <input
                         type="text"
                         value={title}
+                        required
                         onChange={e => setTitle(e.target.value)}
                         className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Enter book title"
