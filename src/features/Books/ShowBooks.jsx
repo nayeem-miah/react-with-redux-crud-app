@@ -1,26 +1,44 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
-import { showBooks } from "./BookSlice";
+import { deleteBooks, showBooks } from "./BookSlice";
 
 const ShowBooks = () => {
+    const [loading, setLoading] = useState(false)
     const books = useSelector(state => state.booksReducer.books);
     const dispatch = useDispatch();
 
     // get fetching data 
     const fetchingData = async () => {
+        setLoading(true)
         try {
             const res = await axios.get("http://localhost:5000/book/all-books");
             dispatch(showBooks(res.data.data));
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             console.log("fetching data error ", error);
         }
     };
 
+    // handle delete
+    const handleDelete = async (id) => {
+        const res = await axios.delete(`http://localhost:5000/book/delete-book/${id}`)
+        // console.log(res);
+        if (res.status === 200 || res.data.result.deletedCount > 0) {
+            alert(res.data.message)
+            dispatch(deleteBooks(id));
+        }
+    };
+
+
     useEffect(() => {
         fetchingData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        handleDelete()
     }, [dispatch])
+    if (loading) return <h3 className="text-center text-amber-300 text-2xl">loading ........</h3>
+
+
     return (
         <div>
             <h3 className="text-2xl text-center py-4"> Show Books list of the books</h3>
@@ -46,7 +64,7 @@ const ShowBooks = () => {
                                     <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded">Edit</button>
                                 </td>
                                 <td className="p-3 border">
-                                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">Delete</button>
+                                    <button onClick={() => handleDelete(book._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">Delete</button>
                                 </td>
                             </tr>
                         ))}
