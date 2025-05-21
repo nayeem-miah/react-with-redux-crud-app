@@ -1,17 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    books: [
-        { id: 1, title: "perea doxical sazid", author: "arif azad" },
-        { id: 2, title: "i love Bd", author: "unknown person" },
-        { id: 3, title: "perea doxical sazid", author: "arif azad" },
-    ]
+    books: []
 };
 
 export const booksSlice = createSlice({
     name: "books",
     initialState: initialState,
     reducers: {
-        showBooks: (state) => state,
+        showBooks: (state, action) => {
+            state.books = action.payload
+       },
         addBooks: (state, action) => {
             state.books.push(action.payload);
         }

@@ -19,7 +19,7 @@ const AddBooks = () => {
             title,
             author
         };
-        console.log(newBook);
+        // console.log(newBook);
         // post data in db
         try {
             const res = await axios.post("http://localhost:5000/book/add-book", newBook);
@@ -27,6 +27,7 @@ const AddBooks = () => {
                 alert(res.data.message);
                 dispatch(addBooks(newBook));
                 navigate("/show-books")
+                e.target.reset()
             }
         } catch (error) {
             console.log(error);
@@ -37,7 +38,6 @@ const AddBooks = () => {
         <div className="py-10">
             <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 rounded shadow-md mt-6 space-y-4">
                 <h2 className="text-xl font-semibold text-center">Add a New Book</h2>
-
                 <div>
                     <label className="block mb-1 font-medium">Title</label>
                     <input

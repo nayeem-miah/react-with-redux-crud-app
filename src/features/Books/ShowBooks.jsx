@@ -1,7 +1,26 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
+import { showBooks } from "./BookSlice";
 
 const ShowBooks = () => {
     const books = useSelector(state => state.booksReducer.books);
+    const dispatch = useDispatch();
+
+    // get fetching data 
+    const fetchingData = async () => {
+        try {
+            const res = await axios.get("http://localhost:5000/book/all-books");
+            dispatch(showBooks(res.data.data));
+        } catch (error) {
+            console.log("fetching data error ", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchingData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch])
     return (
         <div>
             <h3 className="text-2xl text-center py-4"> Show Books list of the books</h3>
@@ -9,6 +28,7 @@ const ShowBooks = () => {
                 <table className="w-full border border-gray-300 shadow-md rounded-md overflow-hidden text-center">
                     <thead className="bg-gray-100">
                         <tr>
+                            <th className="p-3 border">Id</th>
                             <th className="p-3 border">Title</th>
                             <th className="p-3 border">Author</th>
                             <th className="p-3 border">Edit</th>
@@ -17,8 +37,9 @@ const ShowBooks = () => {
                     </thead>
 
                     <tbody>
-                        {books.map((book) => (
-                            <tr key={book.id} className="hover:bg-gray-50 transition">
+                        {books.map((book, id = 0) => (
+                            <tr key={book._id} className="hover:bg-gray-50 transition">
+                                <td className="p-3 border">{id = id + 1}</td>
                                 <td className="p-3 border">{book.title}</td>
                                 <td className="p-3 border">{book.author}</td>
                                 <td className="p-3 border">
