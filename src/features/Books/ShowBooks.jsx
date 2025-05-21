@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import { deleteBooks, showBooks } from "./BookSlice";
+import { Link } from 'react-router-dom';
 
 const ShowBooks = () => {
     const [loading, setLoading] = useState(false)
@@ -23,11 +24,18 @@ const ShowBooks = () => {
 
     // handle delete
     const handleDelete = async (id) => {
-        const res = await axios.delete(`http://localhost:5000/book/delete-book/${id}`)
-        // console.log(res);
-        if (res.status === 200 || res.data.result.deletedCount > 0) {
-            alert(res.data.message)
-            dispatch(deleteBooks(id));
+        setLoading(true)
+        try {
+            const res = await axios.delete(`http://localhost:5000/book/delete-book/${id}`)
+            // console.log(res);
+            if (res.status === 200 || res.data.result.deletedCount > 0) {
+                alert(res.data.message)
+                dispatch(deleteBooks(id));
+                setLoading(false)
+            }
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
         }
     };
 
@@ -36,7 +44,9 @@ const ShowBooks = () => {
         fetchingData()
         handleDelete()
     }, [dispatch])
-    if (loading) return <h3 className="text-center text-amber-300 text-2xl">loading ........</h3>
+
+    // loading spinner
+    if (loading) return <h3 className="text-center text-amber-300 text-2xl">loading ........</h3>;
 
 
     return (
@@ -61,7 +71,7 @@ const ShowBooks = () => {
                                 <td className="p-3 border">{book.title}</td>
                                 <td className="p-3 border">{book.author}</td>
                                 <td className="p-3 border">
-                                    <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded">Edit</button>
+                                    <Link to={`/updated-book`} state={{ book }} className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded">Edit</Link>
                                 </td>
                                 <td className="p-3 border">
                                     <button onClick={() => handleDelete(book._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">Delete</button>
@@ -70,11 +80,8 @@ const ShowBooks = () => {
                         ))}
                     </tbody>
                 </table>
-
             </div>
-
-
         </div>
-    )
-}
+    );
+};
 export default ShowBooks;
